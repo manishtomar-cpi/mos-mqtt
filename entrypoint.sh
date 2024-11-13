@@ -1,16 +1,17 @@
 #!/bin/sh
 
+# Exit immediately if a command exits with a non-zero status
 set -e
 
-# Replace PORT_NUMBER with the actual PORT environment variable for Mosquitto
-sed "s/PORT_NUMBER/${PORT}/g" /mosquitto/config/mosquitto.conf.template > /mosquitto/config/mosquitto.conf
+# Configure Mosquitto to listen on internal port 9001 for WebSockets
+sed "s/PORT_NUMBER/9001/g" /mosquitto/config/mosquitto.conf.template > /mosquitto/config/mosquitto.conf
 
 # Start Mosquitto in the background
 /usr/sbin/mosquitto -c /mosquitto/config/mosquitto.conf &
 
-# Start a simple HTTP server for health checks on a different port (e.g., PORT + 1)
-HEALTH_PORT=$(($PORT + 1))
-echo "Starting HTTP server on port $HEALTH_PORT for health checks..."
-while true; do
-    echo "HTTP/1.1 200 OK\n\nOK" | nc -l -p $HEALTH_PORT
-done
+# Replace ${PORT} in nginx.conf with the actual PORT environment variable
+envsubst '$PORT' < /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.temp
+mv /etc/nginx/nginx.conf.temp /etc/nginx/nginx.conf
+
+# Start Nginx in the foreground
+nginx -g 'daemon off;'

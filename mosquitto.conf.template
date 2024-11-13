@@ -1,8 +1,15 @@
+# MQTT over WebSockets configuration
+
+# Listener for WebSocket connections on internal port 9001
 listener PORT_NUMBER
 protocol websockets
 
+# Allow anonymous connections
 allow_anonymous true
+
+# Disable persistence
 persistence false
 
+# Reduce log verbosity to minimize protocol error logs
 log_type warning
 connection_messages false
