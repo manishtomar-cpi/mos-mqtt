@@ -1,15 +1,8 @@
-# MQTT over WebSockets configuration
-
-# Listener for WebSocket connections (uses the PORT environment variable)
 listener PORT_NUMBER
 protocol websockets
 
-# Allow anonymous connections
 allow_anonymous true
-
-# Disable persistence
 persistence false
 
-# Enable verbose logging for debugging
-log_type all
-connection_messages true
+log_type warning
+connection_messages false
