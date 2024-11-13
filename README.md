@@ -88,11 +88,11 @@ Nginx acts as an intermediary that:
 2. **Example Commands**:
    - **Subscribe to a Topic**:
      ```bash
-     mosquitto_sub -h <your-render-url> -p 80 -t "test/topic" --protocol websockets
+     mosquitto_sub -h https://mos-mqtt-server.onrender.com -p 80 -t "test/topic" --protocol websockets
      ```
    - **Publish a Message**:
      ```bash
-     mosquitto_pub -h <your-render-url> -p 80 -t "test/topic" -m "Hello MQTT" --protocol websockets
+     mosquitto_pub -h https://mos-mqtt-server.onrender.com -p 80 -t "test/topic" -m "Hello MQTT" --protocol websockets
      ```
 
 3. **Verify Messages**:
