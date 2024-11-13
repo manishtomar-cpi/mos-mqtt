@@ -1,10 +1,10 @@
 # Use the official Eclipse Mosquitto image as the base
 FROM eclipse-mosquitto:latest
 
-# Install necessary packages: Nginx, Netcat, and Envsubst for variable substitution
-RUN apt-get update && \
-    apt-get install -y nginx netcat gettext && \
-    rm -rf /var/lib/apt/lists/*
+# Install necessary packages: Nginx, Netcat (OpenBSD version), and Envsubst for variable substitution
+RUN apk update && \
+    apk add --no-cache nginx netcat-openbsd gettext && \
+    rm -rf /var/cache/apk/*
 
 # Copy the Mosquitto configuration template to the container
 COPY mosquitto.conf.template /mosquitto/config/mosquitto.conf.template
