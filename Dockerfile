@@ -1,8 +1,14 @@
-# Base image for Mosquitto
+# Use the official Eclipse Mosquitto image
 FROM eclipse-mosquitto:latest
 
-# Copy configuration file to the container
+# Set environment variable for the port
+ENV PORT 1883
+
+# Copy the Mosquitto configuration file to the appropriate location
 COPY mosquitto.conf /mosquitto/config/mosquitto.conf
 
-# Expose MQTT ports
-EXPOSE 1883 9001
+# Expose the MQTT port (defined in environment variables)
+EXPOSE ${PORT}
+
+# Default command to start the Mosquitto broker
+CMD ["/usr/sbin/mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]
