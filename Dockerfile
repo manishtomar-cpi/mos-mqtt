@@ -1,14 +1,18 @@
-# Use the official Eclipse Mosquitto image
+# Use the official Eclipse Mosquitto image as the base
 FROM eclipse-mosquitto:latest
 
-# Set environment variable for the port
-ENV PORT 1883
+# Copy the Mosquitto configuration template to the container
+COPY mosquitto.conf.template /mosquitto/config/mosquitto.conf.template
 
-# Copy the Mosquitto configuration file to the appropriate location
-COPY mosquitto.conf /mosquitto/config/mosquitto.conf
+# Copy the entrypoint script to the container
+COPY entrypoint.sh /entrypoint.sh
 
-# Expose the MQTT port (defined in environment variables)
+# Make the entrypoint script executable
+RUN chmod +x /entrypoint.sh
+
+# Expose the port specified by the PORT environment variable
+# Render sets the PORT environment variable automatically
 EXPOSE ${PORT}
 
-# Default command to start the Mosquitto broker
-CMD ["/usr/sbin/mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]
+# Set the entrypoint to the custom script
+ENTRYPOINT ["/entrypoint.sh"]

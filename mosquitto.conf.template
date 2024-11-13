@@ -1,5 +1,8 @@
-# Listen on the default MQTT port
-listener 1883
+# MQTT over WebSockets configuration
+
+# Listener for WebSocket connections (uses the PORT environment variable)
+listener PORT_NUMBER
+protocol websockets
 
 # Allow anonymous connections
 allow_anonymous true
