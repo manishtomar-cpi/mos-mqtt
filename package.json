@@ -1,0 +1,15 @@
+{
+  "name": "mqtt",
+  "version": "1.0.0",
+  "description": "This repository sets up a lightweight MQTT broker using Mosquitto and hosts it on Render.",
+  "main": "mqtt_test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mqtt": "^5.10.2"
+  }
+}
